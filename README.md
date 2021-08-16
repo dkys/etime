@@ -11,11 +11,18 @@ go get github.com/dkys/etime
 
 # Using
 
-````go
+```go
+package main
+
 import (
-  "github.com/dkys/etime"
+	"fmt"
+	"github.com/dkys/etime"
 )
 
-start, end := etime.Today()
-timeStr := etime.Format(start,"Y-m-d H/i/s")
-````go
+func main() {
+	start, end := etime.Today()
+	timeStr := etime.Format(start, "Y-m-d H/i/s")
+	fmt.Printf("start %v\n end %v\n timeStr %s\n", start, end, timeStr)
+}
+
+```
