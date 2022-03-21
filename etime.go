@@ -114,7 +114,12 @@ func ParseSpec(spec string) string {
 // Str2Time 返回 日期字符串=>时间对象
 // e.g Str2Time('2021-01-03 23/45/46' ,"Y/m/d H:i:s")
 func Str2Time(date string, spec ...string) time.Time {
-	layout := ParseSpec(spec[0])
-	t, _ := time.ParseInLocation(layout, date, time.Local)
+	s := ""
+	if len(spec) > 0 {
+		s = ParseSpec(spec[0])
+	} else {
+		s = "2006-01-02 15:04:05"
+	}
+	t, _ := time.ParseInLocation(s, date, time.Local)
 	return t
 }
