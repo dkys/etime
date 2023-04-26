@@ -27,6 +27,22 @@ func Month() (time.Time, time.Time) {
 	return MonthFirst(t), MonthLast(t)
 }
 
+// MonthByNum 获取月份的开始和结束时间
+// e.g. 想要获取3月份的开始和结束时间 MonthByNumber(3)
+func MonthByNum(n int) (time.Time, time.Time) {
+	return MonthFirstByNum(n), MonthLastByNum(n)
+}
+
+func MonthFirstByNum(n int) time.Time {
+	t := time.Now()
+	return time.Date(t.Year(), time.Month(n), 1, 0, 0, 0, 0, t.Location())
+}
+
+func MonthLastByNum(n int) time.Time {
+	t := time.Now()
+	return time.Date(t.Year(), time.Month(n+1), 0, 23, 59, 59, 0, t.Location())
+}
+
 // WeekFirst 获取某个时间所在周的第一天
 func WeekFirst(t time.Time) time.Time {
 	w := int(t.Weekday())
@@ -82,7 +98,7 @@ func DayOfAgoOrAfter(d time.Time, n int) (start, end time.Time) {
 }
 
 // Format Returns a date string of a specific format
-// e.g Format(t ,"Y/m/d H:i:s")
+// e.g. Format(t ,"Y/m/d H:i:s")
 func Format(d time.Time, spec ...string) string {
 	s := ""
 	if len(spec) > 0 {
@@ -112,7 +128,7 @@ func ParseSpec(spec string) string {
 }
 
 // Str2Time 返回 日期字符串=>时间对象
-// e.g Str2Time('2021-01-03 23/45/46' ,"Y/m/d H:i:s")
+// e.g. Str2Time('2021-01-03 23/45/46' ,"Y/m/d H:i:s")
 func Str2Time(date string, spec ...string) time.Time {
 	s := ""
 	if len(spec) > 0 {
